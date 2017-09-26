@@ -1,54 +1,63 @@
+import MatrixManipulator from '../Service/MatrixManipulator.js'
+
 export default class Piece {
-	// these values change based on rotation
+    name = 'Piece'
+	// these values change based on orientation
 	width = 0
 	height = 0
-	squares = []	// coordinates are referenced via squares[y][x]
+	squares = []    // coordinates are referenced via squares[y][x]
 
-	rotation = 0	// 0, 1, 2, 3
+	orientation = 0	// 0, 1, 2, 3
+    orientations = null
 
-	constructor() {
-		// this.setPieceDataByRotation();
+	constructor({name, initialSquares}) {
+        this.name = name;
+	    this.initializeOrientations({initialSquares});
 	}
 
+	initializeOrientations({initialSquares}) {
+        const matrixManipulator = new MatrixManipulator();
+
+        // intialize all 4 orientations
+        this.orientations = [];
+        let squares = initialSquares;
+        [...Array(4).keys()].forEach(it => {
+            this.orientations.push({
+                width: matrixManipulator.matrixWidth(squares),
+                height: matrixManipulator.matrixHeight(squares),
+                squares
+            });
+            squares = matrixManipulator.rotate90clockwise(squares);
+        });
+        this.updatePieceData();
+    }
+
 	rotate() {
-		this.rotation++;
-		if (this.rotation > 3)
-			this.rotation = 0;
-		this.setPieceDataByRotation();
+		this.orientation++;
+		if (this.orientation > 3)
+			this.orientation = 0;
+		this.updatePieceData();
 	}
 
 	unrotate() {
-		this.rotation--;
-		if (this.rotation < 0)
-			this.rotation = 3;
-		this.setPieceDataByRotation();
+		this.orientation--;
+		if (this.orientation < 0)
+			this.orientation = 3;
+		this.updatePieceData();
 	}
 
-	// use current rotation to set values (width, height, squares)
-	setPieceDataByRotation() {
-		let width, height, squares;
-		// ({this.width, this.height, this.squares}) = this.getDataByRotation(this.rotation);
-		({width, height, squares} = this.getDataByRotation(this.rotation));
-		this.width = width;
-		this.height = height;
-		this.squares = squares;
-	}
-
-	// returns an object with width, height, squares (array)
-	getDataByRotation(rotation) {
-		console.log('Piece getDataByRotation(); no functionality');
+    /**
+     * Update Piece width, height, and squares according to the Piece's current orientation
+     */
+	updatePieceData() {
+		({width:this.width, height:this.height, squares:this.squares} = this.orientations[this.orientation]);
 	}
 
 	getSquare(x, y) {
-		// TODO safety check on range (both dimensions)
 		return this.squares[y][x];
 	}
 
 	squareIsOpen(x, y) {
-		const square = this.getSquare(x, y);
-		if (square === null)
-			return false;
-
-		return square === 0;
+		return this.getSquare(x, y) === 0;
 	}
 }

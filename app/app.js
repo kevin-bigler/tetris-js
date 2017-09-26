@@ -2195,7 +2195,7 @@ var Texture = function (_EventEmitter) {
             // this is old texturepacker legacy, some games/libraries are passing "true" for rotated textures
             _this._rotate = 2;
         } else if (_this._rotate % 2 !== 0) {
-            throw new Error('attempt to use diamond-shaped UVs. If you are sure, set rotation manually');
+            throw new Error('attempt to use diamond-shaped UVs. If you are sure, set orientation manually');
         }
 
         if (baseTexture.hasLoaded) {
@@ -2577,8 +2577,8 @@ var Texture = function (_EventEmitter) {
 
         /**
          * Indicates whether the texture is rotated inside the atlas
-         * set to 2 to compensate for texture packer rotation
-         * set to 6 to compensate for spine packer rotation
+         * set to 2 to compensate for texture packer orientation
+         * set to 6 to compensate for spine packer orientation
          * can be used to rotate or mirror sprites
          * See {@link PIXI.GroupD8} for explanation
          *
@@ -7408,7 +7408,7 @@ var Matrix = function () {
     };
 
     /**
-     * Applies a rotation transformation to the matrix.
+     * Applies a orientation transformation to the matrix.
      *
      * @param {number} angle - The angle in radians.
      * @return {PIXI.Matrix} This matrix. Good for chaining method calls.
@@ -7526,7 +7526,7 @@ var Matrix = function () {
     };
 
     /**
-     * Decomposes the matrix (x, y, scaleX, scaleY, and rotation) and sets the properties on to a transform.
+     * Decomposes the matrix (x, y, scaleX, scaleY, and orientation) and sets the properties on to a transform.
      *
      * @param {PIXI.Transform|PIXI.TransformStatic} transform - The transform to apply the properties to.
      * @return {PIXI.Transform|PIXI.TransformStatic} The transform with the newly applied properties
@@ -7534,7 +7534,7 @@ var Matrix = function () {
 
 
     Matrix.prototype.decompose = function decompose(transform) {
-        // sort out rotation / skew..
+        // sort out orientation / skew..
         var a = this.a;
         var b = this.b;
         var c = this.c;
@@ -13062,7 +13062,7 @@ var DisplayObject = function (_EventEmitter) {
      * @param {number} [y=0] - The Y position
      * @param {number} [scaleX=1] - The X scale value
      * @param {number} [scaleY=1] - The Y scale value
-     * @param {number} [rotation=0] - The rotation
+     * @param {number} [orientation=0] - The orientation
      * @param {number} [skewX=0] - The X skew value
      * @param {number} [skewY=0] - The Y skew value
      * @param {number} [pivotX=0] - The X pivot value
@@ -13264,13 +13264,13 @@ var DisplayObject = function (_EventEmitter) {
         }
 
         /**
-         * The rotation of the object in radians.
+         * The orientation of the object in radians.
          *
          * @member {number}
          */
 
     }, {
-        key: 'rotation',
+        key: 'orientation',
         get: function get() {
             return this.transform.rotation;
         },
@@ -13387,7 +13387,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /**
  * Generic class to deal with traditional 2D matrix transforms
- * local transformation is calculated from position,scale,skew and rotation
+ * local transformation is calculated from position,scale,skew and orientation
  *
  * @class
  * @extends PIXI.TransformBase
@@ -13433,22 +13433,22 @@ var Transform = function (_TransformBase) {
     _this.pivot = new _math.Point(0, 0);
 
     /**
-     * The rotation value of the object, in radians
+     * The orientation value of the object, in radians
      *
      * @member {Number}
      * @private
      */
     _this._rotation = 0;
 
-    _this._cx = 1; // cos rotation + skewY;
-    _this._sx = 0; // sin rotation + skewY;
-    _this._cy = 0; // cos rotation + Math.PI/2 - skewX;
-    _this._sy = 1; // sin rotation + Math.PI/2 - skewX;
+    _this._cx = 1; // cos orientation + skewY;
+    _this._sx = 0; // sin orientation + skewY;
+    _this._cy = 0; // cos orientation + Math.PI/2 - skewX;
+    _this._sy = 1; // sin orientation + Math.PI/2 - skewX;
     return _this;
   }
 
   /**
-   * Updates the skew values when the skew or rotation changes.
+   * Updates the skew values when the skew or orientation changes.
    *
    * @private
    */
@@ -13522,14 +13522,14 @@ var Transform = function (_TransformBase) {
   };
 
   /**
-   * The rotation of the object in radians.
+   * The orientation of the object in radians.
    *
    * @member {number}
    */
 
 
   _createClass(Transform, [{
-    key: 'rotation',
+    key: 'orientation',
     get: function get() {
       return this._rotation;
     },
@@ -13619,10 +13619,10 @@ var TransformStatic = function (_TransformBase) {
 
         _this._rotation = 0;
 
-        _this._cx = 1; // cos rotation + skewY;
-        _this._sx = 0; // sin rotation + skewY;
-        _this._cy = 0; // cos rotation + Math.PI/2 - skewX;
-        _this._sy = 1; // sin rotation + Math.PI/2 - skewX;
+        _this._cx = 1; // cos orientation + skewY;
+        _this._sx = 0; // sin orientation + skewY;
+        _this._cy = 0; // cos orientation + Math.PI/2 - skewX;
+        _this._sy = 1; // sin orientation + Math.PI/2 - skewX;
 
         _this._localID = 0;
         _this._currentLocalID = 0;
@@ -13641,7 +13641,7 @@ var TransformStatic = function (_TransformBase) {
     };
 
     /**
-     * Called when skew or rotation changes
+     * Called when skew or orientation changes
      *
      * @private
      */
@@ -13737,14 +13737,14 @@ var TransformStatic = function (_TransformBase) {
     };
 
     /**
-     * The rotation of the object in radians.
+     * The orientation of the object in radians.
      *
      * @member {number}
      */
 
 
     _createClass(TransformStatic, [{
-        key: 'rotation',
+        key: 'orientation',
         get: function get() {
             return this._rotation;
         },
@@ -13958,8 +13958,8 @@ init();
  * Implements Dihedral Group D_8, see [group D4]{@link http://mathworld.wolfram.com/DihedralGroupD4.html},
  * D8 is the same but with diagonals. Used for texture rotations.
  *
- * Vector xX(i), xY(i) is U-axis of sprite with rotation i
- * Vector yY(i), yY(i) is V-axis of sprite with rotation i
+ * Vector xX(i), xY(i) is U-axis of sprite with orientation i
+ * Vector yY(i), yY(i) is V-axis of sprite with orientation i
  * Rotations: 0 grad (0), 90 grad (2), 180 grad (4), 270 grad (6)
  * Mirrors: vertical (8), main diagonal (10), horizontal (12), reverse diagonal (14)
  * This is the small part of gameofbombs.com portal system. It works.
@@ -14006,7 +14006,7 @@ var GroupD8 = {
     },
 
     /**
-     * Adds 180 degrees to rotation. Commutative operation.
+     * Adds 180 degrees to orientation. Commutative operation.
      *
      * @memberof PIXI.GroupD8
      * @param {number} rotation - The number to rotate.
@@ -14061,11 +14061,11 @@ var GroupD8 = {
     },
 
     /**
-     * Helps sprite to compensate texture packer rotation.
+     * Helps sprite to compensate texture packer orientation.
      *
      * @memberof PIXI.GroupD8
      * @param {PIXI.Matrix} matrix - sprite world matrix
-     * @param {number} rotation - The rotation factor to use.
+     * @param {number} rotation - The orientation factor to use.
      * @param {number} tx - sprite anchoring
      * @param {number} ty - sprite anchoring
      */
@@ -14073,7 +14073,7 @@ var GroupD8 = {
         var tx = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
         var ty = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
-        // Packer used "rotation", we use "inv(rotation)"
+        // Packer used "orientation", we use "inv(orientation)"
         var mat = tempMatrices[GroupD8.inv(rotation)];
 
         mat.tx = tx;
@@ -15734,7 +15734,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * otherwise black rectangles will be drawn instead.
  *
  * A BaseRenderTexture takes a snapshot of any Display Object given to its render method. The position
- * and rotation of the given Display Objects is ignored. For example:
+ * and orientation of the given Display Objects is ignored. For example:
  *
  * ```js
  * let renderer = PIXI.autoDetectRenderer(1024, 1024, { view: canvas, ratio: 1 });
@@ -30917,7 +30917,7 @@ var core = _interopRequireWildcard(_core);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 /**
- * Returns the global position of the displayObject. Does not depend on object scale, rotation and pivot.
+ * Returns the global position of the displayObject. Does not depend on object scale, orientation and pivot.
  *
  * @memberof PIXI.DisplayObject#
  * @param {Point} point - the point to write the global value to. If null a new point will be returned
@@ -31482,11 +31482,11 @@ var ColorMatrixFilter = function (_core$Filter) {
         var sinR = Math.sin(rotation);
         var sqrt = Math.sqrt;
 
-        /* a good approximation for hue rotation
+        /* a good approximation for hue orientation
          This matrix is far better than the versions with magic luminance constants
          formerly used here, but also used in the starling framework (flash) and known from this
          old part of the internet: quasimondo.com/archives/000565.php
-          This new matrix is based on rgb cube rotation in space. Look here for a more descriptive
+          This new matrix is based on rgb cube orientation in space. Look here for a more descriptive
          implementation as a shader not a general matrix:
          https://github.com/evanw/glfx.js/blob/58841c23919bd59787effc0333a4897b43835412/src/filters/adjust/huesaturation.js
           This is the source for the code:
@@ -35141,7 +35141,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 /**
  * The ParticleContainer class is a really fast version of the Container built solely for speed,
  * so use when you need a lot of sprites or particles. The tradeoff of the ParticleContainer is that advanced
- * functionality will not work. ParticleContainer implements only the basic object transform (position, scale, rotation).
+ * functionality will not work. ParticleContainer implements only the basic object transform (position, scale, orientation).
  * Any other functionality like tinting, masking, etc will not work on sprites in this batch.
  *
  * It's extremely easy to use :
@@ -35170,7 +35170,7 @@ var ParticleContainer = function (_core$Container) {
      * @param {object} [properties] - The properties of children that should be uploaded to the gpu and applied.
      * @param {boolean} [properties.scale=false] - When true, scale be uploaded and applied.
      * @param {boolean} [properties.position=true] - When true, position be uploaded and applied.
-     * @param {boolean} [properties.rotation=false] - When true, rotation be uploaded and applied.
+     * @param {boolean} [properties.orientation=false] - When true, orientation be uploaded and applied.
      * @param {boolean} [properties.uvs=false] - When true, uvs be uploaded and applied.
      * @param {boolean} [properties.alpha=false] - When true, alpha be uploaded and applied.
      * @param {number} [batchSize=15000] - Number of particles per batch.
@@ -35277,7 +35277,7 @@ var ParticleContainer = function (_core$Container) {
         if (properties) {
             this._properties[0] = 'scale' in properties ? !!properties.scale : this._properties[0];
             this._properties[1] = 'position' in properties ? !!properties.position : this._properties[1];
-            this._properties[2] = 'rotation' in properties ? !!properties.rotation : this._properties[2];
+            this._properties[2] = 'orientation' in properties ? !!properties.rotation : this._properties[2];
             this._properties[3] = 'uvs' in properties ? !!properties.uvs : this._properties[3];
             this._properties[4] = 'alpha' in properties ? !!properties.alpha : this._properties[4];
         }
@@ -35385,7 +35385,7 @@ var ParticleContainer = function (_core$Container) {
             context.globalAlpha = this.worldAlpha * child.alpha;
 
             if (child.rotation % (Math.PI * 2) === 0) {
-                // this is the fastest  way to optimise! - if rotation is 0 then we can avoid any kind of setTransform call
+                // this is the fastest  way to optimise! - if orientation is 0 then we can avoid any kind of setTransform call
                 if (isRotated) {
                     context.setTransform(transform.a, transform.b, transform.c, transform.d, transform.tx * renderer.resolution, transform.ty * renderer.resolution);
 
@@ -36032,7 +36032,7 @@ var ParticleRenderer = function (_core$ObjectRenderer) {
      *
      * @param {PIXI.DisplayObject[]} children - the array of display objects to render
      * @param {number} startIndex - the index to start from in the children array
-     * @param {number} amount - the amount of children that will have their rotation uploaded
+     * @param {number} amount - the amount of children that will have their orientation uploaded
      * @param {number[]} array - The vertices to upload.
      * @param {number} stride - Stride to use for iteration.
      * @param {number} offset - Offset to start at.
@@ -36056,7 +36056,7 @@ var ParticleRenderer = function (_core$ObjectRenderer) {
      *
      * @param {PIXI.DisplayObject[]} children - the array of display objects to render
      * @param {number} startIndex - the index to start from in the children array
-     * @param {number} amount - the amount of children that will have their rotation uploaded
+     * @param {number} amount - the amount of children that will have their orientation uploaded
      * @param {number[]} array - The vertices to upload.
      * @param {number} stride - Stride to use for iteration.
      * @param {number} offset - Offset to start at.
@@ -36104,7 +36104,7 @@ var ParticleRenderer = function (_core$ObjectRenderer) {
      *
      * @param {PIXI.DisplayObject[]} children - the array of display objects to render
      * @param {number} startIndex - the index to start from in the children array
-     * @param {number} amount - the amount of children that will have their rotation uploaded
+     * @param {number} amount - the amount of children that will have their orientation uploaded
      * @param {number[]} array - The vertices to upload.
      * @param {number} stride - Stride to use for iteration.
      * @param {number} offset - Offset to start at.
