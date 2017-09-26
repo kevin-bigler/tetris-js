@@ -52,3 +52,4 @@ To filter out webpack's console messages, use this regex in e.g. chrome's consol
 ```
 ^(?!.*?\[[\w]*\])
 ```
+
