@@ -1,33 +1,48 @@
-Instructions
+# Instructions
 
-To Run
+It's tetris.
 
+## To Run
+
+```bash
 npm install
+```
 
-A. For live reload:
+### (A) For live reload
+
+```bash
 npm start
+```
 
-In a browser, go to http://<host>:<port>/webpack-dev-server/
-For example:
+In a browser, go to 
+http://<host>:<port>/webpack-dev-server/
+
+For example,
 http://localhost:8080/webpack-dev-server/
 
-Should say "App ready" at the top of the page.
+Should say _"App ready"_ at the top of the page.
 
 
-B. For bundle file generation:
+### (B) For bundle file generation
+
+```bash
 npm run build
+```
 
+### (C) For bundle file generation, updating upon saving any files
 
-C. For bundle file generation, updating upon saving any files:
+```bash
 npm run watch
+```
 
+## Editing
 
-Edit app/js/main.js
+Edit `app/js/main.js`
 or other modules loaded by main.js (directly or indirectly)
 
-Edit app/index.html
+Edit `app/index.html`
 
-Enjoy!
+**Enjoy!**
 
 
 Useful Info:
