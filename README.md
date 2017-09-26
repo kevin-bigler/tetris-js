@@ -45,6 +45,10 @@ Edit `app/index.html`
 **Enjoy!**
 
 
-Useful Info:
+## Useful Info
+
 To filter out webpack's console messages, use this regex in e.g. chrome's console
+
+```
 ^(?!.*?\[[\w]*\])
+```
