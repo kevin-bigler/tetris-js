@@ -26,6 +26,7 @@
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-stage-2": "^6.22.0",
+    "csv": "^1.1.1",
     "key-code": "0.0.1",
     "lodash": "^4.17.4",
     "pixi.js": "^4.4.4",

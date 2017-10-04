@@ -18,10 +18,8 @@ const loadSquaresFromCsv = (csv, matrixManipulator) => {
     // 2. replace all values
     //      a. 0 -> if cell.trim().length < 1
     //      b. 1 -> if cell.trim().length > 0
-    // 3. remove all empty rows on the edges (its array contains ONLY 0s
-    // 4. rotate 90 degrees clockwise, repeat step 3
-    // 5. rotate 90 degrees counter-clockwise
-    // 6. return the resulting 2d array
+    // 3. return the resulting 2d array
+
 };
 
 export default class PieceFactory {
