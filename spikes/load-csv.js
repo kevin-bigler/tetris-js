@@ -1,5 +1,6 @@
 const fs = require('fs');
-const parse = require('csv-parse');
+const csvParse = require('csv-parse');
+const csvParseSync = require('csv-parse/lib/sync');
 const path = require('path');
 
 const inputPath = path.join(__dirname, '..', 'app', 'resources', 'pieces', 'S.csv');
@@ -11,17 +12,25 @@ const readCsv = new Promise((resolve, reject) => {
             return reject(err);
         }
 
-        parse(fileData, {trim: true}, function(err, rows) {
+        csvParse(fileData, {trim: true}, function(err, rows) {
             if (err) {
                 return reject(err);
             }
-            console.log('rows:', rows);
             return resolve(rows);
         });
     });
 
 });
 
-readCsv.then((rows) => {
-    console.log('done reading csv. rows:', rows);
-});
+// readCsv.then((rows) => {
+//     console.log('done reading csv. rows:', rows);
+// });
+
+const readCsvSync = (file) => {
+    const fileData = fs.readFileSync(file);
+    const rows = csvParseSync(fileData, {trim: true});
+    return rows;
+};
+
+
+console.log('rows:', readCsvSync(inputPath));

@@ -5,7 +5,7 @@ module.exports = {
   context: path.join(__dirname, "app"),
 
   //define entry point
-  entry: './js/main.js',
+  entry: './js/_main.js',
 
   //define output point
   output: {

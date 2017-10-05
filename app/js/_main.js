@@ -1,6 +1,5 @@
 import * as PIXI from 'pixi.js';
 // import {Application} from 'pixi.js';
-// import GreatDane from './GreatDane2.js';
 import GameEngine from './GameEngine.js';
 
 console.log('');

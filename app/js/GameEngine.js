@@ -1,8 +1,6 @@
 import * as PIXI from 'pixi.js';
 import Artist from './Artist.js';
 import GameBoard from './GameBoard.js';
-import LPiece from './Piece/LPiece.js';
-import SquarePiece from './Piece/SquarePiece.js';
 import PieceFactory from './Piece/PieceFactory.js';
 import InputManager from './InputManager.js';
 import Gravity from './Gravity.js';
