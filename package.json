@@ -4,6 +4,7 @@
   "description": "Tetris for the browser, written in javascript",
   "main": "src/app.js",
   "scripts": {
+    "test": "jest src",
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html",
     "watch": "parcel watch src/index.html"
@@ -30,6 +31,16 @@
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "babel-plugin-lodash": "^3.3.4",
+    "jest": "^24.5.0",
     "parcel-bundler": "^1.12.3"
+  },
+  "jest": {
+    "testMatch": ["src/**/?(*.)+(spec|test).[jt]s?(x)"],
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "**/*.{js,jsx,ts}",
+      "!**/node_modules/**",
+      "!**/dist/**"
+    ]
   }
 }

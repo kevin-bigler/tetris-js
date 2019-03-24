@@ -1,4 +1,4 @@
-import GameEngine from './js/GameEngine.js';
+import GameEngine from './js/main/GameEngine.js';
 
 console.log('');
 console.log('');
@@ -11,5 +11,5 @@ console.log('');
 
 
 const gameEngine = new GameEngine();
-gameEngine.initialize();
+gameEngine.init();
 gameEngine.newGame();

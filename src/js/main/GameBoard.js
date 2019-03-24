@@ -11,7 +11,7 @@ export default class GameBoard {
 		this.app = app;
 	}
 
-	initialize({squaresWide, squaresHigh}) {
+	init({squaresWide, squaresHigh}) {
 		this.squaresWide = squaresWide;
 		this.squaresHigh = squaresHigh;
 
@@ -23,20 +23,19 @@ export default class GameBoard {
 			}
 			this.squares.push(column);
 		}
-
 	}
 
 	fillSquare(x, y) {
 		const square = this.getSquare(x, y);
 		if (square !== null) {
-			console.log('square is not null');
-			console.log(`square before: ${JSON.stringify(square)}`);
+			// console.log('square is not null');
+			// console.log(`square before: ${JSON.stringify(square)}`);
 			square.fill();
-			console.log(`square after: ${JSON.stringify(square)}`);
+			// console.log(`square after: ${JSON.stringify(square)}`);
 		}
 
-		const verifySquare = this.getSquare(x, y);
-		console.log(`square after after: ${JSON.stringify(verifySquare)}`);
+		// const verifySquare = this.getSquare(x, y);
+		// console.log(`square after after: ${JSON.stringify(verifySquare)}`);
 	}
 
 	/**
@@ -71,8 +70,9 @@ export default class GameBoard {
 		// set each non-open piece square to open on the game board
 		const squaresForPiece = this.getBoardSquaresForPiece({piece, x, y});
 		squaresForPiece.forEach((info) => {
-			if (info.boardSquare !== null)
+			if (info.boardSquare !== null) {
 				info.boardSquare.clear();
+			}
 		});
 	}
 
@@ -80,7 +80,6 @@ export default class GameBoard {
 	 * returns true if successful (piece fit), returns false if piece could not fit
 	 */
 	addPiece({piece, x, y}) {
-
 		if (! this.pieceCanFit({piece, x, y})) {
 			console.error('piece cannot fit! cannot add piece to board.');
 			return false;

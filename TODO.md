@@ -1,5 +1,7 @@
 # TODO
 
+- add linting (`eslint`)
+- add types in an opt-in fashion (`flow` + `flow-runtime`)
 - inject configuration instead of hard-coding it in class properties
 - add config yaml files
 - inject dependencies

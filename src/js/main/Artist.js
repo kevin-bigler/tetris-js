@@ -25,7 +25,7 @@ export default class Artist {
 		this.app = app;
 	}
 
-	initialize({squaresWide, squaresHigh}) {
+	init({squaresWide, squaresHigh}) {
 		this.squaresWide = squaresWide;
 		this.squaresHigh = squaresHigh;
 

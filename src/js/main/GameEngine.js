@@ -25,17 +25,17 @@ export default class GameEngine {
 
 	}
 
-	initialize({squaresWide = this.squaresWide, squaresHigh = this.squaresHigh} = {}) {
+	init({squaresWide = this.squaresWide, squaresHigh = this.squaresHigh} = {}) {
 		// console.log('GameEngine init', `squaresWide: ${squaresWide}, squaresHigh: ${squaresHigh}`);
 
 		this.app = new PIXI.Application(Artist.appWidth, Artist.appHeight, {transparent: true});
 		document.getElementById('display').appendChild(this.app.view);
 
 		this.gameBoard = new GameBoard(this.app);
-		this.gameBoard.initialize({squaresWide, squaresHigh});
+		this.gameBoard.init({squaresWide, squaresHigh});
 
 		this.artist = new Artist(this.app);
-		this.artist.initialize({squaresWide, squaresHigh});
+		this.artist.init({squaresWide, squaresHigh});
 
 		this.inputManager = new InputManager(this);
 
