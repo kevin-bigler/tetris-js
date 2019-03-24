@@ -37,8 +37,8 @@ npm run watch
 
 ## Editing
 
-Edit `app/js/main.js`
-or other modules loaded by main.js (directly or indirectly)
+Edit `app/js/app.js`
+or other modules loaded by app.js (directly or indirectly)
 
 Edit `app/index.html`
 

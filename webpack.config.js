@@ -4,7 +4,7 @@ module.exports = {
 
   context: path.resolve(__dirname, "src"),
 
-  entry: './js/main.js',
+  entry: './js/app.js',
   output: {
       path: path.resolve(__dirname, "src/"),
       filename: 'app.js'
