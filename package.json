@@ -2,12 +2,12 @@
   "name": "tetris-js",
   "version": "1.0.0",
   "description": "Tetris for the browser, written in javascript",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "parcel app/index.html",
-    "build": "parcel build app/index.html",
-    "watch": "parcel watch app/index.html",
-    "start:webpack": "webpack-dev-server --content-base app --inline --hot",
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "watch": "parcel watch src/index.html",
+    "start:webpack": "webpack-dev-server --content-base src --inline --hot",
     "build:webpack": "webpack",
     "watch:webpack": "webpack --watch"
   },

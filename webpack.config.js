@@ -2,11 +2,11 @@ const path = require('path');
 
 module.exports = {
 
-  context: path.resolve(__dirname, "app"),
+  context: path.resolve(__dirname, "src"),
 
   entry: './js/main.js',
   output: {
-      path: path.resolve(__dirname, "app/"),
+      path: path.resolve(__dirname, "src/"),
       filename: 'app.js'
   },
 
