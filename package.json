@@ -4,9 +4,12 @@
   "description": "Tetris for the browser, written in javascript",
   "main": "app.js",
   "scripts": {
-    "start": "webpack-dev-server --content-base app --inline --hot",
-    "build": "webpack",
-    "watch": "webpack --watch"
+    "start": "parcel app/index.html",
+    "build": "parcel build app/index.html",
+    "watch": "parcel watch app/index.html",
+    "start:webpack": "webpack-dev-server --content-base app --inline --hot",
+    "build:webpack": "webpack",
+    "watch:webpack": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -31,5 +34,8 @@
     "pixi.js": "^4.4.4",
     "webpack": "^2.3.3",
     "webpack-dev-server": "^2.4.2"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3"
   }
 }

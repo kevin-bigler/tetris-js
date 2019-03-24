@@ -1,4 +1,4 @@
-# Instructions
+# tetris-js
 
 It's tetris.
 
