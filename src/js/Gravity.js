@@ -20,7 +20,7 @@ export default class Gravity {
 
 	stopGravity() {
 		// stops the clock
-		if ( this.active ) {
+		if (this.active) {
 			this.active = false;
 			this.stopTrigger = true;
 		}
@@ -33,12 +33,12 @@ export default class Gravity {
 	}
 
 	update() {
-		if ( this.stopTrigger ) {
+		if (this.stopTrigger) {
 			this.stopTrigger = false;
 			return;
 		}
 
-		if ( ! this.active ) {
+		if (! this.active) {
 			return;
 		}
 		// console.log('it has been 1 seconds');

@@ -53,7 +53,7 @@ export default class GameBoard {
 		const boardSquaresForPiece = [];
 		for (let pieceX = 0; pieceX < piece.width; pieceX++) {
 			for (let pieceY = 0; pieceY < piece.height; pieceY++) {
-				if ( ! piece.squareIsOpen(pieceX, pieceY) ) {
+				if (! piece.squareIsOpen(pieceX, pieceY)) {
 					const boardX = x + pieceX;
 					const boardY = y + pieceY;
 					const boardSquare = this.getSquare(boardX, boardY);
@@ -81,7 +81,7 @@ export default class GameBoard {
 	 */
 	addPiece({piece, x, y}) {
 
-		if ( ! this.pieceCanFit({piece, x, y}) ) {
+		if (! this.pieceCanFit({piece, x, y})) {
 			console.error('piece cannot fit! cannot add piece to board.');
 			return false;
 		}
@@ -100,19 +100,19 @@ export default class GameBoard {
 		// 1. Check if piece's corners fit into the game board
 		const pieceCorners = this.getPieceCorners({piece, x, y});
 
-		if ( ! this.isInRange(pieceCorners.topLeft) ) {
+		if (! this.isInRange(pieceCorners.topLeft)) {
 			console.log('piece is being set out of range! culprit: topLeft');
 			return false;
 		}
-		if ( ! this.isInRange(pieceCorners.topRight) ) {
+		if (! this.isInRange(pieceCorners.topRight)) {
 			console.log('piece is being set out of range! culprit: topRight');
 			return false;
 		}
-		if ( ! this.isInRange(pieceCorners.bottomLeft) ) {
+		if (! this.isInRange(pieceCorners.bottomLeft)) {
 			console.log('piece is being set out of range! culprit: bottomLeft');
 			return false;
 		}
-		if ( ! this.isInRange(pieceCorners.bottomRight) ) {
+		if (! this.isInRange(pieceCorners.bottomRight)) {
 			console.log('piece is being set out of range! culprit: bottomRight');
 			return false;
 		}
@@ -149,14 +149,14 @@ export default class GameBoard {
 	}
 	squareIsOpen(x, y) {
 		const square = this.getSquare(x, y);
-		if ( square === null ) {
+		if (square === null) {
 			return false;
 		}
 
 		return square.isOpen();
 	}
 	getSquare(x, y) {
-		if ( ! this.isInRange({x, y}) ) {
+		if (! this.isInRange({x, y})) {
 			console.error(`${x}, ${y} is out of bounds!`);
 			return null;
 		}

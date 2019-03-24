@@ -16,10 +16,10 @@ export default class GameEngine {
 	squaresWide = 8;
 	squaresHigh = 16;
 
-	newPiecePosition = {x:3, y:0};
+	newPiecePosition = {x: 3, y: 0};
 
 	currentPiece = null;
-	currentPosition = {x:0, y:0};
+	currentPosition = {x: 0, y: 0};
 
 	constructor() {
 
@@ -28,7 +28,7 @@ export default class GameEngine {
 	initialize({squaresWide = this.squaresWide, squaresHigh = this.squaresHigh} = {}) {
 		// console.log('GameEngine init', `squaresWide: ${squaresWide}, squaresHigh: ${squaresHigh}`);
 
-		this.app = new PIXI.Application(Artist.appWidth, Artist.appHeight, {transparent : true});
+		this.app = new PIXI.Application(Artist.appWidth, Artist.appHeight, {transparent: true});
 		document.getElementById('display').appendChild(this.app.view);
 
 		this.gameBoard = new GameBoard(this.app);
@@ -67,12 +67,12 @@ export default class GameEngine {
 
 		const pieceAddedSuccessfully = this.gameBoard.addPiece(
 			{
-				piece:this.currentPiece,
-				x:this.newPiecePosition.x,
-				y:this.newPiecePosition.y
+				piece: this.currentPiece,
+				x: this.newPiecePosition.x,
+				y: this.newPiecePosition.y
 			});
 
-		if ( ! pieceAddedSuccessfully ) {
+		if (! pieceAddedSuccessfully) {
 			console.log('GAME OVER!');
 			this.gravity.stopGravity();
 			this.inputManager.stopListening();
@@ -80,8 +80,8 @@ export default class GameEngine {
 		}
 
 		this.currentPosition = {
-			x:this.newPiecePosition.x,
-			y:this.newPiecePosition.y
+			x: this.newPiecePosition.x,
+			y: this.newPiecePosition.y
 		};
 
 		this.drawSquares();
@@ -93,7 +93,7 @@ export default class GameEngine {
 	}
 
 	rotatePiece() {
-		if ( ! this.canRotatePiece() ) {
+		if (! this.canRotatePiece()) {
 			console.log('cannot rotate');
 			return;
 		}
@@ -105,7 +105,7 @@ export default class GameEngine {
 	}
 
 	movePieceLeft() {
-		if ( ! this.canMovePieceLeft() ) {
+		if (! this.canMovePieceLeft()) {
 			console.log('cannot move left');
 			return;
 		}
@@ -117,7 +117,7 @@ export default class GameEngine {
 	}
 
 	movePieceRight() {
-		if ( ! this.canMovePieceRight() ) {
+		if (! this.canMovePieceRight()) {
 			console.log('cannot move right');
 			return;
 		}
@@ -129,7 +129,7 @@ export default class GameEngine {
 	}
 
 	movePieceDown() {
-		if ( ! this.canMovePieceDown() ) {
+		if (! this.canMovePieceDown()) {
 			console.log('cannot move down - new piece');
 			this.updateCompletions();
 			this.newPiece();
@@ -142,10 +142,13 @@ export default class GameEngine {
 		this.drawSquares();
 	}
 
-	// normally this will not be allowed
-	// > it just seems useful for development
+	//
+	/**
+	 * normally this will not be allowed
+	 * -- it just seems useful for development
+	 */
 	movePieceUp() {
-		if ( ! this.canMovePieceUp() ) {
+		if (! this.canMovePieceUp()) {
 			console.log('cannot move up');
 			return;
 		}
@@ -159,13 +162,10 @@ export default class GameEngine {
 	canRotatePiece() {
 		this.removePiece();	// temporarily remove the piece to simulate it moving
 		this.currentPiece.rotate();
-		if ( this.gameBoard.pieceCanFit(
-			{
+		if (this.gameBoard.pieceCanFit({
 				piece: this.currentPiece,
-				x: this.currentPosition.x,
-				y: this.currentPosition.y
-			})
-		) {
+				...this.currentPosition
+		})) {
 			this.currentPiece.unrotate();
 			this.addPiece();
 			return true;
@@ -179,13 +179,11 @@ export default class GameEngine {
 	canMovePieceLeft() {
 		this.removePiece();
 
-		const canFit = this.gameBoard.pieceCanFit(
-			{
-				piece: this.currentPiece,
-				x: this.currentPosition.x - 1,
-				y: this.currentPosition.y
-			}
-		);
+		const canFit = this.gameBoard.pieceCanFit({
+			piece: this.currentPiece,
+			x: this.currentPosition.x - 1,
+			y: this.currentPosition.y
+		});
 
 		this.addPiece();
 
@@ -195,13 +193,11 @@ export default class GameEngine {
 	canMovePieceRight() {
 		this.removePiece();
 
-		const canFit = this.gameBoard.pieceCanFit(
-			{
-				piece: this.currentPiece,
-				x: this.currentPosition.x + 1,
-				y: this.currentPosition.y
-			}
-		);
+		const canFit = this.gameBoard.pieceCanFit({
+			piece: this.currentPiece,
+			x: this.currentPosition.x + 1,
+			y: this.currentPosition.y
+		});
 
 		this.addPiece();
 
@@ -211,13 +207,11 @@ export default class GameEngine {
 	canMovePieceDown() {
 		this.removePiece();
 
-		const canFit = this.gameBoard.pieceCanFit(
-			{
-				piece: this.currentPiece,
-				x: this.currentPosition.x,
-				y: this.currentPosition.y + 1
-			}
-		);
+		const canFit = this.gameBoard.pieceCanFit({
+			piece: this.currentPiece,
+			x: this.currentPosition.x,
+			y: this.currentPosition.y + 1
+		});
 
 		this.addPiece();
 
@@ -227,13 +221,11 @@ export default class GameEngine {
 	canMovePieceUp() {
 		this.removePiece();
 
-		const canFit = this.gameBoard.pieceCanFit(
-			{
-				piece: this.currentPiece,
-				x: this.currentPosition.x,
-				y: this.currentPosition.y - 1
-			}
-		);
+		const canFit = this.gameBoard.pieceCanFit({
+			piece: this.currentPiece,
+			x: this.currentPosition.x,
+			y: this.currentPosition.y - 1
+		});
 
 		this.addPiece();
 
@@ -241,11 +233,11 @@ export default class GameEngine {
 	}
 
 	removePiece() {
-		this.gameBoard.removePiece({piece:this.currentPiece, x:this.currentPosition.x, y:this.currentPosition.y});
+		this.gameBoard.removePiece({piece: this.currentPiece, ...this.currentPosition});
 	}
 
 	addPiece() {
-		return this.gameBoard.addPiece({piece:this.currentPiece, x:this.currentPosition.x, y:this.currentPosition.y});
+		return this.gameBoard.addPiece({piece: this.currentPiece, ...this.currentPosition});
 	}
 
 	increaseGravity() {

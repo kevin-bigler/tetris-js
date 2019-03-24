@@ -29,7 +29,7 @@ export default class Artist {
 		this.squaresWide = squaresWide;
 		this.squaresHigh = squaresHigh;
 
-		this.squareSize = this.calculateSquareSize({appWidth:Artist.appWidth, appHeight:Artist.appHeight, squaresWide, squaresHigh});
+		this.squareSize = this.calculateSquareSize({appWidth: Artist.appWidth, appHeight: Artist.appHeight, squaresWide, squaresHigh});
 		// console.log(`squareSize calculated: ${this.squareSize}`);
 
 		this.initSquares();
