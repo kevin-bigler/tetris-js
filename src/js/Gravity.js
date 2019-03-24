@@ -58,7 +58,6 @@ export default class Gravity {
 	 * @returns {number} # milliseconds
 	 */
 	getInterval() {
-
 		const slope = (Gravity.endInterval - Gravity.startInterval)/(Gravity.maxLevel - Gravity.minLevel);
 
 		const interval = Math.floor(
