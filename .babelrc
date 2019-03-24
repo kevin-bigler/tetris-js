@@ -1,0 +1,4 @@
+{
+  "presets": ["@babel/preset-env"],
+  "plugins": ["lodash", "@babel/plugin-proposal-class-properties"]
+}
