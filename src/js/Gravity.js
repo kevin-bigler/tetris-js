@@ -1,14 +1,14 @@
 export default class Gravity {
-	static startInterval = 1000	// 1 second
-	static endInterval = 333		// roughly 1/3 second
-	static maxLevel = 9					// so 10 levels total
-	static minLevel = 0
+	static startInterval = 1000;	// 1 second
+	static endInterval = 333;   	// roughly 1/3 second
+	static maxLevel = 9;			// so 10 levels total
+	static minLevel = 0;
 
-	gameEngine = null
-	gravityLevel = 0
-	active = false
+	gameEngine = null;
+	gravityLevel = 0;
+	active = false;
 
-	stopTrigger = false
+	stopTrigger = false;
 
 	constructor(gameEngine) {
 		this.gameEngine = gameEngine;
@@ -46,8 +46,17 @@ export default class Gravity {
 		setTimeout(this.update.bind(this), this.getInterval());	// TODO change to use js "interval" instead
 	}
 
-	// calculate time interval in between updates, based on gravityLevel and some sort of math function (linear, exponential, etc)
-	// > returns # milliseconds
+	/**
+	 * calculate time interval in between updates, based on gravityLevel and some sort of math function (linear, exponential, etc)
+	 *
+	 * y = ax + b
+	 * but cap at a minimum interval
+	 * a (aka slope) = (endInterval - startInterval)/(# levels)
+	 * b (starting y) = startInterval
+	 * x = current gravityLevel
+	 *
+	 * @returns {number} # milliseconds
+	 */
 	getInterval() {
 
 		const slope = (Gravity.endInterval - Gravity.startInterval)/(Gravity.maxLevel - Gravity.minLevel);
@@ -61,21 +70,14 @@ export default class Gravity {
 		console.log('current gravity interval: ', interval);
 
 		return interval;
-
-		/*
-			y = ax + b
-			* but cap at a minimum interval
-			a (aka slope) = (endInterval - startInterval)/(# levels)
-			b (starting y) = startInterval
-			x = current gravityLevel
-		*/
 	}
 
 	increaseGravity() {
 		console.log('Gravity.increaseGravity()', this.gravityLevel);
 		this.gravityLevel++;
-		if (this.gravityLevel >= Gravity.maxLevel)
+		if (this.gravityLevel >= Gravity.maxLevel) {
 			this.gravityLevel = Gravity.maxLevel;
+		}
 
 		console.log(`now gravity is ${this.gravityLevel}`);
 	}

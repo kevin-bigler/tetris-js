@@ -1,33 +1,31 @@
 import * as PIXI from 'pixi.js';
-import Square from './SquareVisual.js';
 
 export default class Artist {
 
-	static appWidth = 800
-	static appHeight = 500
+	static appWidth = 800;
+	static appHeight = 500;
 
-	lightGreen = 0x1fed04
-	white = 0xffffff
+	lightGreen = 0x1fed04;
+	white = 0xffffff;
 
-	fillColor = this.lightGreen
-	clearColor = this.white
-	squareColor = this.clearColor
+	fillColor = this.lightGreen;
+	clearColor = this.white;
+	squareColor = this.clearColor;
 
-	squareSize = 0	// used for width and height
-	squares = []
-	squareTexture = null
+	squareSize = 0;	// used for width and height
+	squares = [];
+	squareTexture = null;
 
 	squaresWide = 0;
 	squaresHigh = 0;
 
-	app = null
+	app = null;
 
 	constructor(app) {
 		this.app = app;
 	}
 
 	initialize({squaresWide, squaresHigh}) {
-
 		this.squaresWide = squaresWide;
 		this.squaresHigh = squaresHigh;
 
@@ -41,14 +39,12 @@ export default class Artist {
 	calculateSquareSize({appWidth, appHeight, squaresWide, squaresHigh}) {
 		let fitWidth = Math.floor(appWidth / squaresWide);
 		let fitHeight = Math.floor(appHeight / squaresHigh);
-		if (fitWidth > fitHeight)
-			return fitHeight;
-		else
-			return fitWidth;
+		return fitWidth > fitHeight
+			? fitHeight
+			: fitWidth;
 	}
 
 	initSquares() {
-
 		const gridWidth = this.squareSize * this.squaresWide;
 		const gridHeight = this.squareSize * this.squaresHigh;
 
@@ -88,7 +84,7 @@ export default class Artist {
 	}
 
 	createSquareSprite(x, y, size) {
-		var squareSprite = new PIXI.Sprite(this.squareTexture);
+		const squareSprite = new PIXI.Sprite(this.squareTexture);
 
 		squareSprite.x = x;
 		squareSprite.y = y;
@@ -99,9 +95,7 @@ export default class Artist {
 	}
 
 	createSquare(x, y, size, color) {
-		var square = new PIXI.Graphics();
-		// set the lineStyle to 0 so the square doesn't have an outline
-		// square.lineStyle(0);
+		const square = new PIXI.Graphics();
 		square.lineStyle(2, 'black', 1);
 		square.beginFill(color, 1);
 		square.drawRect(x, y, size, size);
@@ -110,7 +104,7 @@ export default class Artist {
 	}
 
 	drawTetrisShape(x, y, shape) {
-		if (shape == 'I') {
+		if (shape === 'I') {
 			this.fillSquare(x, y);
 			this.fillSquare(x, y+1);
 			this.fillSquare(x, y+2);
@@ -119,12 +113,6 @@ export default class Artist {
 	}
 
 	drawSquares(gameBoard) {
-		// console.log('Artist.drawSquares()');
-		// this.fillSquare(2, 1);
-		// this.clearSquare(2, 1);
-		// this.fillSquare(7, 7);
-		// this.clearSquare(0, 0);
-		// this.fillSquare(1, 9);
 		for (let x = 0; x < this.squaresWide; x++) {
 			for (let y = 0; y < this.squaresHigh; y++) {
 				// console.log(`iter: ${x}, ${y}`);
@@ -145,20 +133,10 @@ export default class Artist {
 
 	clearSquare(x, y) {
 		this.tintSquare(x, y, this.clearColor);
-		// if (x === 1 && y === 1) {
-		// 	console.log('called upon to clear 1,1');
-		// }
-		// this.tintSquare(x, y, this.fillColor);
 	}
 
 	tintSquare(x, y, color) {
-		// this.squares[y][x].tint = color;
 		const square = this.getSquare(x, y);
-		// if (color === this.fillColor) {
-			// console.log(`tintSquare(${x}, ${y}, ${color})`);
-			// console.log(`square: `, square);
-		// }
-		// right now the squares are all Sprites
 		square.tint = color;
 	}
 

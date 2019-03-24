@@ -1,8 +1,8 @@
 import KeyCode from 'key-code';
 
 export default class InputManager {
-	gameEngine = null
-	listening = false
+	gameEngine = null;
+	listening = false;
 
 	constructor(gameEngine) {
 		this.gameEngine = gameEngine;

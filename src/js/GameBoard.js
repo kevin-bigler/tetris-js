@@ -2,10 +2,10 @@ import Square from './SquareData.js';
 import _ from 'lodash';
 
 export default class GameBoard {
-	squares = []
-	squaresWide = 0
-	squaresHigh = 0
-	app = null
+	squares = [];
+	squaresWide = 0;
+	squaresHigh = 0;
+	app = null;
 
 	constructor(app) {
 		this.app = app;
@@ -39,9 +39,16 @@ export default class GameBoard {
 		console.log(`square after after: ${JSON.stringify(verifySquare)}`);
 	}
 
-	// returns array of the board squares for each point that a piece is filled in
-	// and each board square's position
-	// {boardSquare, position:x,y}}
+	/**
+	 * returns array of the board squares for each point that a piece is filled in
+	 * and each board square's position
+	 * {boardSquare, position:x,y}}
+	 *
+	 * @param piece
+	 * @param x
+	 * @param y
+	 * @returns {Array}
+	 */
 	getBoardSquaresForPiece({piece, x, y}) {
 		const boardSquaresForPiece = [];
 		for (let pieceX = 0; pieceX < piece.width; pieceX++) {
@@ -69,7 +76,9 @@ export default class GameBoard {
 		});
 	}
 
-	// returns true if successful (piece fit), returns false if piece could not fit
+	/**
+	 * returns true if successful (piece fit), returns false if piece could not fit
+	 */
 	addPiece({piece, x, y}) {
 
 		if ( ! this.pieceCanFit({piece, x, y}) ) {
@@ -121,7 +130,9 @@ export default class GameBoard {
 		return squaresAreAvailable;
 	}
 
-	// return position of each of the 4 corners for the piece
+	/**
+	 * return position of each of the 4 corners for the piece
+ 	 */
 	getPieceCorners({piece, x, y}) {
 		const topLeft = {x, y};
 		const topRight = {x: x + piece.width - 1, y};
@@ -222,7 +233,9 @@ export default class GameBoard {
 		}
 	}
 
-	// slides all rows above y down 1 row
+	/**
+	 * slides all rows above y down 1 row
+	 */
 	dropRowsAbove(y) {
 		// shift the rows above row y
 		if (y < 0 || y >= this.squaresHigh) {

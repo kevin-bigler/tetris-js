@@ -1,27 +1,25 @@
 import * as PIXI from 'pixi.js';
 import Artist from './Artist.js';
 import GameBoard from './GameBoard.js';
-import LPiece from './Piece/LPiece.js';
-import SquarePiece from './Piece/SquarePiece.js';
 import PieceFactory from './Piece/PieceFactory.js';
 import InputManager from './InputManager.js';
 import Gravity from './Gravity.js';
 
 export default class GameEngine {
-	app = null
-	artist = null
-	gameBoard = null
-	inputManager = null
-	gravity = null
-	pieceFactory = null
+	app = null;
+	artist = null;
+	gameBoard = null;
+	inputManager = null;
+	gravity = null;
+	pieceFactory = null;
 
-	squaresWide = 8
-	squaresHigh = 16
+	squaresWide = 8;
+	squaresHigh = 16;
 
-	newPiecePosition = {x:3, y:0}
+	newPiecePosition = {x:3, y:0};
 
-	currentPiece = null
-	currentPosition = {x:0, y:0}
+	currentPiece = null;
+	currentPosition = {x:0, y:0};
 
 	constructor() {
 
