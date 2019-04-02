@@ -4,7 +4,9 @@ export default class TwoDArray {
     matrix;
 
     constructor({n, m, initVal = 0}) {
-        this.matrix = Array(n).fill(initVal).map(() => Array(m).fill(initVal));
+        this.matrix =
+            Array(n).fill(initVal)
+                    .map(() => Array(m).fill(initVal));
     }
 
     get(x, y) {
@@ -20,15 +22,16 @@ export default class TwoDArray {
     }
 
     has(x, y) {
-        return this.matrix[x] !== undefined
+        return Array.isArray(this.matrix)
+            && this.matrix[x] !== undefined
             && this.matrix[x][y] !== undefined;
     }
 
-    get length() {
+    get length() {// TODO make it safe (and test it)
         return this.matrix.length;
     }
 
-    get height() {
+    get height() { // TODO make it safe (and test it)
         return this.matrix[0].length;
     }
 
