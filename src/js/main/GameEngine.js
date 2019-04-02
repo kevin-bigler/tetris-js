@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import Artist from './Artist.js';
 import GameBoard from './GameBoard.js';
-import PieceFactory from './Piece/PieceFactory.js';
+import PieceFactory from './piece/PieceFactory.js';
 import InputManager from './InputManager.js';
 import Gravity from './Gravity.js';
 
