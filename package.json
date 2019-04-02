@@ -21,6 +21,7 @@
   "homepage": "https://github.com/kevin-bigler/tetris-js#readme",
   "dependencies": {
     "@babel/polyfill": "^7.4.0",
+    "clone": "^2.1.2",
     "key-code": "0.0.1",
     "lodash": "^4.17.4",
     "pixi.js": "^4.4.4"
@@ -35,7 +36,9 @@
     "parcel-bundler": "^1.12.3"
   },
   "jest": {
-    "testMatch": ["**/?(*.)+(spec|test).[jt]s?(x)"],
+    "testMatch": [
+      "**/?(*.)+(spec|test).[jt]s?(x)"
+    ],
     "testEnvironment": "node",
     "collectCoverageFrom": [
       "**/*.{js,jsx,ts}",
