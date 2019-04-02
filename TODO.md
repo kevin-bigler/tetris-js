@@ -17,3 +17,4 @@
 - create scoring logic
 - create unit tests
 - swap `console.log`s for a logger, like `bunyan` + configure log level options
+- add menus

@@ -27,7 +27,7 @@ export default class InputManager {
 			this.gameEngine.newGame();
 		}
 
-		if (! this.listening) {
+		if (!this.listening) {
 			console.log('not yet listening for inputs');
 			return;
 		}

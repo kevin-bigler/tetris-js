@@ -21,10 +21,6 @@ export default class GameEngine {
 	currentPiece = null;
 	currentPosition = {x: 0, y: 0};
 
-	constructor() {
-
-	}
-
 	init({squaresWide = this.squaresWide, squaresHigh = this.squaresHigh} = {}) {
 		// console.log('GameEngine init', `squaresWide: ${squaresWide}, squaresHigh: ${squaresHigh}`);
 
@@ -65,14 +61,13 @@ export default class GameEngine {
 	newPiece() {
 		this.currentPiece = this.pieceFactory.createRandomPiece();
 
-		const pieceAddedSuccessfully = this.gameBoard.addPiece(
-			{
-				piece: this.currentPiece,
-				x: this.newPiecePosition.x,
-				y: this.newPiecePosition.y
-			});
+		const pieceAddedSuccessfully = this.gameBoard.addPiece({
+			piece: this.currentPiece,
+			x: this.newPiecePosition.x,
+			y: this.newPiecePosition.y
+		});
 
-		if (! pieceAddedSuccessfully) {
+		if (!pieceAddedSuccessfully) {
 			console.log('GAME OVER!');
 			this.gravity.stopGravity();
 			this.inputManager.stopListening();
@@ -85,7 +80,6 @@ export default class GameEngine {
 		};
 
 		this.drawSquares();
-
 	}
 
 	drawSquares() {
@@ -93,7 +87,7 @@ export default class GameEngine {
 	}
 
 	rotatePiece() {
-		if (! this.canRotatePiece()) {
+		if (!this.canRotatePiece()) {
 			console.log('cannot rotate');
 			return;
 		}
@@ -105,7 +99,7 @@ export default class GameEngine {
 	}
 
 	movePieceLeft() {
-		if (! this.canMovePieceLeft()) {
+		if (!this.canMovePieceLeft()) {
 			console.log('cannot move left');
 			return;
 		}
@@ -117,7 +111,7 @@ export default class GameEngine {
 	}
 
 	movePieceRight() {
-		if (! this.canMovePieceRight()) {
+		if (!this.canMovePieceRight()) {
 			console.log('cannot move right');
 			return;
 		}
@@ -129,7 +123,7 @@ export default class GameEngine {
 	}
 
 	movePieceDown() {
-		if (! this.canMovePieceDown()) {
+		if (!this.canMovePieceDown()) {
 			console.log('cannot move down - new piece');
 			this.updateCompletions();
 			this.newPiece();
@@ -148,7 +142,7 @@ export default class GameEngine {
 	 * -- it just seems useful for development
 	 */
 	movePieceUp() {
-		if (! this.canMovePieceUp()) {
+		if (!this.canMovePieceUp()) {
 			console.log('cannot move up');
 			return;
 		}
@@ -163,8 +157,8 @@ export default class GameEngine {
 		this.removePiece();	// temporarily remove the piece to simulate it moving
 		this.currentPiece.rotate();
 		if (this.gameBoard.pieceCanFit({
-				piece: this.currentPiece,
-				...this.currentPosition
+			piece: this.currentPiece,
+			...this.currentPosition
 		})) {
 			this.currentPiece.unrotate();
 			this.addPiece();

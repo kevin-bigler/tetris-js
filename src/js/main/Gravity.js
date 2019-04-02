@@ -38,7 +38,7 @@ export default class Gravity {
 			return;
 		}
 
-		if (! this.active) {
+		if (!this.active) {
 			return;
 		}
 		// console.log('it has been 1 seconds');
