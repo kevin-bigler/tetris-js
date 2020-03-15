@@ -13,7 +13,7 @@ describe('Matrix', () => {
     it('creates 2x3 array & #get(x, y) works', () => {
         const uut = new Matrix(2,3, 'foo');
 
-        expect(uut.length).toBe(2);
+        expect(uut.width).toBe(2);
         expect(uut.height).toBe(3);
 
         expect(uut.get(1, 2)).toBeDefined();

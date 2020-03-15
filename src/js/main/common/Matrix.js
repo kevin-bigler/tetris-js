@@ -1,48 +1,57 @@
 import clone from 'clone';
 
 export default class Matrix {
-    array2D;
+    _array2D;
 
     /**
-     * Creates Matrix n wide and y high
+     * Creates a Matrix n wide and y high. Size is immutable.
      *
-     * @param {number} n length of x axis
-     * @param {number} m height of y axis
+     * @param {number} n length of x axis. Must be > 0
+     * @param {number} m height of y axis. Must be > 0
      * @param {*} [initVal] Optional. Value given to each element of the matrix upon initialization
      */
     constructor(n, m, initVal) {
-        this.array2D =
+        if (n < 1 || m < 1) {
+            throw new Error(`width and height should both be > 0, received: width=${n}, height=${m}`);
+        }
+
+        this._array2D =
             Array(n).fill(initVal)
                     .map(() => Array(m).fill(initVal));
     }
 
     get(x, y) {
         return this.has(x, y)
-            ? this.array2D[x][y]
+            ? this._array2D[x][y]
             : undefined;
     }
 
     set(x, y, val) {
         if (this.has(x, y)) {
-            this.array2D[x][y] = val;
+            this._array2D[x][y] = val;
         }
     }
 
+    /**
+     * Checks if (x, y) lies in bounds of the matrix
+     * @param x
+     * @param y
+     * @returns {*|boolean}
+     */
     has(x, y) {
-        return Array.isArray(this.array2D)
-            && this.array2D[x] !== undefined
-            && this.array2D[x][y] !== undefined;
+        return x >= 0 && x < this._array2D.length
+            && y >= 0 && y < this._array2D[x].length;
     }
 
-    get length() {// TODO make it safe (and test it)
-        return this.array2D.length;
+    get width() {
+        return this._array2D.length;
     }
 
-    get height() { // TODO make it safe (and test it)
-        return this.array2D[0].length;
+    get height() {
+        return this._array2D[0].length;
     }
 
     toArray() {
-        return clone(this.array2D);
+        return clone(this._array2D);
     }
 }
