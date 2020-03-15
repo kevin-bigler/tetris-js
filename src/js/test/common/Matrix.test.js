@@ -1,6 +1,6 @@
-import TwoDArray from '../../main/common/2DArray';
+import Matrix from '../../main/common/Matrix';
 
-describe('2DArray', () => {
+describe('Matrix', () => {
     /**
      *  2x3 array test
      *
@@ -11,7 +11,7 @@ describe('2DArray', () => {
      *
      */
     it('creates 2x3 array & #get(x, y) works', () => {
-        const uut = new TwoDArray({n: 2, m: 3});
+        const uut = new Matrix(2,3, 'foo');
 
         expect(uut.length).toBe(2);
         expect(uut.height).toBe(3);
@@ -28,7 +28,7 @@ describe('2DArray', () => {
     });
 
     it('#set() happy path', () => {
-        const uut = new TwoDArray({n: 3, m: 2});
+        const uut = new Matrix(3, 2, 0);
         expect(uut.toArray()).toEqual([
             [0, 0],
             [0, 0],
@@ -44,7 +44,7 @@ describe('2DArray', () => {
     });
 
     it('#toArray() returns a regular 2d array COPY', () => {
-        const uut = new TwoDArray({n: 1, m: 2});
+        const uut = new Matrix(1, 2, 'foo');
         expect(Array.isArray(uut.toArray())).toBe(true);
         expect(Array.isArray(uut.toArray()[0])).toBe(true);
         // TODO assert that it is a copy by changing it, compare to original etc
