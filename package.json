@@ -24,7 +24,8 @@
     "clone": "^2.1.2",
     "key-code": "0.0.1",
     "lodash": "^4.17.4",
-    "pixi.js": "^4.4.4"
+    "pixi.js": "^4.4.4",
+    "ramda": "^0.27.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
